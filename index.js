@@ -165,11 +165,11 @@ function Ship(length) {
         let clicked = false;
         if (name == "computerboard") {
           box.addEventListener('click', () => {
-            if (current && started && !clicked) {
+            if (currentUser && started && !clicked) {
               player.attack(attackX, attackY);
               box.classList.add("hit");
               clicked = true;
-              current = false;
+              currentUser = false;
               checkSunk();
               switchPlayers();
             }
@@ -189,10 +189,10 @@ function Ship(length) {
             });
             restart.id = "restart";
             restart.innerHTML = "Restart";
-            if (current) {
-            menuwrapper.innerHTML = "<h2>The computer has won!</h2>";
+            if (currentUser) {
+            menuwrapper.innerHTML = "<h2>Computer Won...</h2>";
             } else {
-              menuwrapper.innerHTML = "<h2>You have won!</h2>"
+              menuwrapper.innerHTML = "<h2>Congratulations...You Won...</h2>"
             }
             menuwrapper.appendChild(restart);
             gameover = true;
@@ -313,7 +313,7 @@ function Ship(length) {
   let computerBoard;
   let playerBoard;
   let player;
-  let current;
+  let currentUser;
   let started;
   let computer;
   let gameover;
@@ -321,7 +321,7 @@ function Ship(length) {
   function initialize() {
     started = false;
     gameover = false;
-    current = true;
+    currentUser = true;
     playerBoard = new Gameboard();
     computerBoard = new Gameboard();
     let menuwrapper = document.getElementById("menuwrapper");
@@ -342,12 +342,12 @@ function Ship(length) {
   
   function switchPlayers() {
     if (!gameover) {
-      if (current) {
+      if (currentUser) {
         return;
       } else {
         setTimeout(() => {
           computer.createCoords();
-          current = true;
+          currentUser = true;
         }, 600)
       }
     }
